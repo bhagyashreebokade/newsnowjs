@@ -8,6 +8,8 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+  <script src='https://kit.fontawesome.com/a076d05399.js'></script>
+  <!-- <link rel="stylesheet" href="./loginStyles.css"> -->
   <link rel="stylesheet" href="./styles.css">
   <link rel="manifest" href="./manifest.webmanifest">
   <title>NewsNow!</title>
@@ -15,6 +17,8 @@
 
 <body>
   <!-- <header> -->
+      <script src="./index.js" type="module"></script>
+
       <div class="row">
         <div class="col">
           <h1>NewsNow!</h1>
@@ -35,17 +39,145 @@
             <form>
               <label for="search">Search</label>
               <input type="text" id="search" name="search">
+              <button id="account" type="button" class="btn" data-toggle="modal" data-target="#exampleModal">
+                  <i class='fas fa-user' style='font-size:24px'></i>
+                </button>
+                <p id="demo"style="font-weight: bold;"></p>
             </form>
         </div>
       </div>
+      <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Account</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <div id="signup">
+                <h1>sign up</h1>
+                <form>
+                  <div class="box">
+                    <label>First Name</label>
+                    <input type="text" name="" required="" class="reg">
+                  </div>
+                  <div class="box">
+                    <label>Last Name</label>
+                    <input type="text" name="" required="" class="reg">
+                  </div>
+                  <div class="box">
+                    <label>Email</label>
+                    <input type="Email" name="" required="" class="reg">
+                  </div>
+                  <div class="box">
+                    <label>Password</label>
+                    <input type="password" name="" required="" class="reg">
+                  </div>
+                  <div class="box">
+                    <label>Re-enter Password</label>
+                    <input type="text" name="" required="" class="reg">
+                  </div>
+                  <input type="checkbox" name=""><span>I agree terms and conditions.</span><br />
+                  <input type="submit" name="" value="Sign up"><br />
+                  <input type="submit" name="" value="Already have an account" onclick="login();">
+                </form>
+              </div>
+              <div id="login">
+                <h1>login</h1>
+                <form>
+                  <div class="box">
+                    <label>Username</label>
+                    <input type="text" name="" required="" class="reg">
+                  </div>
+                  <div class="box">
+                    <label>Password</label>
+                    <input type="password" name="" required="" class="reg">
+                  </div>
+                  <input type="submit" name="" value="login" data-dismiss="modal"><br />
+                  <input type="submit" name="" value="create account" onclick="signup();">
+                </form>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Modal -->
+<!-- <div id="myModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <div class="modal-content">
+      <div class="modal-header">
+          <h4 class="modal-title">Account</h4>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div id = "signup">
+          <h1>sign up</h1>
+          <form >
+            <div class = "box">
+              <input type="text" name="" required="" class="reg">
+              <label>First Name</label>
+            </div>
+            <div class = "box">
+              <input type="text" name="" required="" class="reg">
+              <label>Last Name</label>
+            </div>
+            <div class = "box">
+              <input type="Email" name="" required="" class="reg">
+              <label>Email</label>
+            </div>
+            <div class = "box">
+              <input type="password" name="" required="" class="reg">
+              <label>Password</label>
+            </div>
+            <div class = "box">
+              <input type="text" name="" required="" class="reg">
+              <label>Re-enter Password</label>
+            </div>
+            <input type="checkbox" name=""><span>I agree terms and conditions.</span><br/>
+            <input type="submit" name="" value="Sign up"><br/>
+            <input type="submit" name="" value="Already have an account" onclick="logi();">
+          </form>
+        </div>
+        <div id = "login">
+          <h1>login</h1>
+          <form>
+            <div class="box">
+              <input type="text" name="" required="" class="reg">
+              <label>Username</label>
+            </div>
+            <div class="box">
+              <input type="password" name="" required="" class="reg">
+              <label>Password</label>
+            </div>
+            <input type="checkbox" name=""><span>remember me</span><br/>
+            <input type="submit" name="" value="login"><br/>
+            <input type="submit" name="" value="create account" onclick="singup();">
+          </form>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div> -->
   <!-- </header> -->
-  <main></main>
+  <div class="accordion" id="accordionExample">
+  </div>
+  <!-- <div id="main"></div> -->
   <!-- <main>
     Get an API key from
     <a href="https://newsapi.org">newsapi.org</a> and put it in
     <code>newsApi.js</code>.
   </main> -->
-  <script src="./index.js" type="module"></script>
 </body>
 
 </html>
