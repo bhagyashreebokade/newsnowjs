@@ -36,15 +36,17 @@ document.getElementById("demo").innerHTML = x;
 var lastValue = '';
 $("#search").on('change keyup paste', function() {
     if ($(this).val() != '' && $(this).val() != lastValue) {
-      $("main").empty();
+      $("#accordionExample").empty();
         lastValue = $(this).val();
         console.log('The text box really changed this time',lastValue);
-        getNews(null, null, true, lastValue);
+        createSkeleton(0, 'Search Results for '+lastValue);
+        getNews(null, null, true, lastValue, 0);
     }else if($(this).val() == ''){
-      $("main").empty();
+      $("#accordionExample").empty();
       var country = 'in';
-      categories.forEach((category) => {
-        getNews(category, country, false, null);
+      categories.forEach((category, index) => {
+        createSkeleton(index, category);
+        getNews(category, country, false, null, index);
       });
     }
 });
@@ -55,71 +57,61 @@ const categories = ['general','sports','science','technology','business','entert
 var country = 'in';
 
 $('#countries').change(function(){
-  $("main").empty();
+  $("#accordionExample").empty();
   country = $(this).val();
-  categories.forEach((category) => {
-    getNews(category, $(this).val(), false);
+  categories.forEach((category, index) => {
+    createSkeleton(index, category);
+    getNews(category, $(this).val(), false, null, index);
   });
-})
+});
 
 window.addEventListener('load', () => {
   var e = document.getElementById("countries");
   //var country = e.options[e.selectedIndex].value;
   categories.forEach((category, index) => {
-    // if(index == 0){
-    //   $( "#accordionExample" ).append(
-    //     '<div class="card">'+
-    //       '<div class="card-header" id="heading"'+index+'">'+
-    //         '<h2 class="mb-0">'+
-    //         '<button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapse'+index+'" aria-expanded="true" aria-controls="collapse'+index+'">'+category+
-    //         '</button>'+
-    //         '</h2>'+
-    //       '</div>'+
-    //       '<div id="collapse'+index+'" class="collapse show" aria-labelledby="heading'+index+'" data-parent="#accordionExample">'+
-    //       '</div>'+
-    //     '</div>'
-    //   );
-    // }else{
-      var x = getNews(category, country, false, null, index);
-      if(index == 0){
-        $('#accordionExample').append(
-          '<div class="card">'+
-            '<div class="card-header" id="heading"'+index+'">'+
-              '<h2 class="mb-0">'+
-                '<button style="text-transform: capitalize;" class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapse'+index+'" aria-expanded="true" aria-controls="collapse'+index+'">'+
-                  category+
-                '</button>'+
-              '</h2>'+
-            '</div>'+
-            '<div id="collapse'+index+'" class="collapse show" aria-labelledby="heading'+index+'" data-parent="#accordionExample">'+
-              //'<div class="card-body">'+
-                //x+
-              //'</div>'+
-            '</div>'+
-          '</div>'
-        );
-      }else{
-        $('#accordionExample').append(
-          '<div class="card">'+
-            '<div class="card-header" id="heading"'+index+'">'+
-              '<h2 class="mb-0">'+
-                '<button style="text-transform: capitalize;" class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapse'+index+'" aria-expanded="true" aria-controls="collapse'+index+'">'+
-                  category+
-                '</button>'+
-              '</h2>'+
-            '</div>'+
-            '<div id="collapse'+index+'" class="collapse" aria-labelledby="heading'+index+'" data-parent="#accordionExample">'+
-              //'<div class="card-body">'+
-                //x+
-              //'</div>'+
-            '</div>'+
-          '</div>'
-        );
-      }
-    //}
+      getNews(category, country, false, null, index);
+      createSkeleton(index, category);
   });
   registerSW();
 });
+
+function createSkeleton(index, category){
+  if(index == 0){
+    $('#accordionExample').append(
+      '<div class="card">'+
+        '<div class="card-header" id="heading"'+index+'">'+
+          '<h2 class="mb-0">'+
+            '<button style="text-transform: capitalize;" class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapse'+index+'" aria-expanded="true" aria-controls="collapse'+index+'">'+
+              category+
+            '</button>'+
+          '</h2>'+
+        '</div>'+
+        '<div id="collapse'+index+'" class="collapse show" aria-labelledby="heading'+index+'" data-parent="#accordionExample">'+
+          //'<div class="card-body">'+
+            //x+
+          //'</div>'+
+        '</div>'+
+      '</div>'
+    );
+  }else{
+    $('#accordionExample').append(
+      '<div class="card">'+
+        '<div class="card-header" id="heading"'+index+'">'+
+          '<h2 class="mb-0">'+
+            '<button style="text-transform: capitalize;" class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapse'+index+'" aria-expanded="true" aria-controls="collapse'+index+'">'+
+              category+
+            '</button>'+
+          '</h2>'+
+        '</div>'+
+        '<div id="collapse'+index+'" class="collapse" aria-labelledby="heading'+index+'" data-parent="#accordionExample">'+
+          //'<div class="card-body">'+
+            //x+
+          //'</div>'+
+        '</div>'+
+      '</div>'
+    );
+  }
+};
 
 async function getNews(category, country, isSearched, searchTxt, index) {
   var res;

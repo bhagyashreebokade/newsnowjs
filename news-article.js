@@ -8,6 +8,7 @@ class NewsArticle extends HTMLElement {
           <style>
            h2 {
             font-family: Georgia, 'Times New Roman', Times, serif;
+            width: 30%;
           }
           
            a,
@@ -17,7 +18,7 @@ class NewsArticle extends HTMLElement {
           }
           
            img {
-            width: 100%;
+            width: 30%;
           }
           </style>
           <a href="${article.url}">
